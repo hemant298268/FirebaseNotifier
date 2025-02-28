@@ -1,4 +1,5 @@
 import java.util.List;
+import java.util.Map;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -6,12 +7,13 @@ import com.google.firebase.messaging.Message;
 
 public class deviceNotifier {
 	
-	public String sendNotif_singleDevice(String deviceToken, Message message) {
+	public String sendNotif_singleDevice(String deviceToken, Map<String, String> messageBody) {
 		try {
 			FCMTokenInitialiser tokenInit = new FCMTokenInitialiser();
             FirebaseApp.initializeApp(tokenInit.getOptions());
             
-			 message = Message.builder()
+			 Message message = Message.builder()
+					 .putAllData(messageBody)
 				    .setToken(deviceToken)
 				    .build();
 
@@ -27,13 +29,13 @@ public class deviceNotifier {
 		}
 	}
 	
-	public String sendNotif_topic(String topic, Message message) {
+	public String sendNotif_topic(String topic, Map<String, String> messageBody) {
 		try {
 			FCMTokenInitialiser tokenInit = new FCMTokenInitialiser();
             FirebaseApp.initializeApp(tokenInit.getOptions());
             
-			message = Message.builder()
-				    .putData("score", "853")
+			Message message = Message.builder()
+					.putAllData(messageBody)
 				    .setTopic("TESTNOTIF")
 				    .build();
 
