@@ -9,7 +9,7 @@ public class FCMTokenInitialiser {
 
 	private static String jsonLocation = "/Users/apple/Documents/tBot/app/test_1.json";
 	
-	public String getAccessToken() throws IOException {
+	public static String getAccessToken() throws IOException {
 		GoogleCredentials googleCredentials = GoogleCredentials
 				.fromStream(new FileInputStream(jsonLocation))
 				.createScoped(Arrays.asList("https://www.googleapis.com/auth/firebase.messaging"));
@@ -17,7 +17,7 @@ public class FCMTokenInitialiser {
 		return googleCredentials.getAccessToken().getTokenValue();
 	}
 	
-	public FirebaseOptions getOptions() throws IOException {
+	public static FirebaseOptions getOptions() throws IOException {
 		FileInputStream serviceAccount = new FileInputStream(jsonLocation);
 		
 		return new FirebaseOptions.Builder()

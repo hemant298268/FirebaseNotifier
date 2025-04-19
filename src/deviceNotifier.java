@@ -1,9 +1,9 @@
-import java.util.List;
 import java.util.Map;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.Message;
+import com.google.firebase.messaging.Notification;
 
 public class deviceNotifier {
 	
@@ -11,8 +11,13 @@ public class deviceNotifier {
 		try {
 			FCMTokenInitialiser tokenInit = new FCMTokenInitialiser();
             FirebaseApp.initializeApp(tokenInit.getOptions());
+            Notification notification = Notification.builder()
+            		.setTitle("TBot")
+            		.setBody("This is a test notification")
+            		.build();
             
 			 Message message = Message.builder()
+					 .setNotification(notification)
 					 .putAllData(messageBody)
 				    .setToken(deviceToken)
 				    .build();
@@ -34,7 +39,13 @@ public class deviceNotifier {
 			FCMTokenInitialiser tokenInit = new FCMTokenInitialiser();
             FirebaseApp.initializeApp(tokenInit.getOptions());
             
+            Notification notification = Notification.builder()
+            		.setTitle("TBot")
+            		.setBody("This is a test notification")
+            		.build();
+            
 			Message message = Message.builder()
+					.setNotification(notification)
 					.putAllData(messageBody)
 				    .setTopic("TESTNOTIF")
 				    .build();
